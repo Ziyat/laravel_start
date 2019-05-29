@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Cabinet;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -18,9 +17,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return mixed
      */
     public function index()
     {
