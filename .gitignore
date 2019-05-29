@@ -10,7 +10,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/.idea
+.idea
 .DS_Store
 /v8-compile-cache-0
 .phpstorm
