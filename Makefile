@@ -5,13 +5,21 @@ docker-down:
 docker-build:
 	@docker-compose up --build -d
 test:
-	@docker exec explores_php-cli_1 vendor/bin/phpunit --colors=always
+	@docker-compose exec php-cli vendor/bin/phpunit
 assets-install:
-	@docker exec explores_node_1 yarn install
+	@docker-compose exec node yarn install
 assets-dev:
-	@docker exec explores_node_1 yarn run dev
+	@docker-compose exec node yarn run dev
+assets-prod:
+	@docker-compose exec node yarn run prod
 assets-watch:
-	@docker exec explores_node_1 yarn run watch
+	@docker-compose exec node yarn run watch
+migrate/up:
+	@docker-compose exec php-cli php artisan migrate
+migrate/down:
+	@docker-compose exec php-cli php artisan migrate:rollback
+migrate/fresh:
+	@docker-compose exec php-cli php artisan migrate:fresh
 perm:
 	@sudo chown ${USER}:${USER} bootstrap/cache -R
 	@sudo chown ${USER}:${USER} storage -R

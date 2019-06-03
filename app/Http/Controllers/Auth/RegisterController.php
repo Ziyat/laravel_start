@@ -2,71 +2,75 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Domain\User\UseCases\Services\UserService;
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Auth\RegisterRequest;
 
+/**
+ * Class RegisterController
+ * @package App\Http\Controllers\Auth
+ * @property UserService $service
+ */
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+    private $service;
+    private $response_status = null;
+    private $response_message = null;
 
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/cabinet';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(UserService $service)
     {
+        $this->service = $service;
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param array $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function showRegistrationForm()
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return view('auth.register');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param array $data
-     * @return \App\User
-     */
-    protected function create(array $data)
+    public function register(RegisterRequest $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        try {
+            $user = $this->service->register($request);
+            $this->setResponseMessage(
+                'success',
+                "{$user->name} Check your email and click on the link to verify."
+            );
+        } catch (\Exception $e) {
+            $this->setResponseMessage(
+                'error',
+                $e->getMessage()
+            );
+        }
+        return redirect()->route('login')
+            ->with($this->response_status, $this->response_message);
     }
+
+
+    public function verify($token)
+    {
+        try {
+            $this->service->verify($token);
+            $this->setResponseMessage(
+                'success',
+                'Your email is verified. You can now login.'
+            );
+        } catch (\Exception $e) {
+            $this->setResponseMessage(
+                'error',
+                $e->getMessage()
+            );
+        }
+        return redirect()->route('login')
+            ->with($this->response_status, $this->response_message);
+    }
+
+
+    private function setResponseMessage($status, $message)
+    {
+        $this->response_status = $status;
+        $this->response_message = $message;
+    }
+
+
 }
