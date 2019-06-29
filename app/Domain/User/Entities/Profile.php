@@ -26,5 +26,16 @@ class Profile extends Model
         return $this->hasOne(User::class);
     }
 
+    protected $fillable = [
+        'name',
+        'family_name',
+        'birth_date',
+        'photo',
+        'nickname',
+        'gender',
+        'country_id'
+    ];
+
+    protected $dateFormat = 'U';
     protected $table = 'profiles';
 }

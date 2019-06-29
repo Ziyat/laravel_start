@@ -1,0 +1,44 @@
+@import '~startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.css';
+@import '~startbootstrap-sb-admin-2/scss/sb-admin-2';
+
+$primary: #510426;
+
+// custom
+
+.logo{
+  background-image: url("../images/logo-100x100.svg");
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  transform: rotate(-18deg);
+}
+.text-primary {
+  color: $primary !important;
+}
+
+.bg-primary, .btn-primary, .page-item.active .page-link, .badge-primary {
+  background: $primary !important;
+}
+
+.btn-primary,.page-item.active .page-link {
+  border-color: #610429 !important;
+}
+
+.border-left-primary {
+  border-left: 0.25rem solid $primary !important;
+}
+
+.bg-gradient-primary {
+  background: #510426;
+  background: -moz-linear-gradient(-45deg, #510426 0%, #330d1a 100%);
+  background: -webkit-linear-gradient(-45deg, #510426 0%, #330d1a 100%);
+  background: linear-gradient(135deg, #510426 0%, #330d1a 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#510426', endColorstr='#330d1a', GradientType=1);
+  background-size: cover;
+}
+
+.topbar .navbar-search input {
+  font-size: 1rem!important;
+}
+
+

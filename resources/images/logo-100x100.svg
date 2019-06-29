@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>100x100</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="100x100">
+            <g id="star">
+                <g id="SMALL" transform="translate(50.000000, 50.000000) scale(-1, 1) rotate(-15.000000) translate(-50.000000, -50.000000) translate(9.269663, 9.269663)">
+                    <polygon id="Path-2" fill="#FFFFFF" points="40.7303371 0 30.5477528 30.5477528 0 40.7303371 30.5477528 50.9129213 40.7303371 81.4606742 50.9129213 50.9129213 81.4606742 40.7303371 50.9129213 30.5477528"></polygon>
+                    <polygon id="Path-3" fill="#610429" points="0 40.7303371 40.7303371 40.7303371 30.5222325 50.8426966"></polygon>
+                    <polygon id="Path-3" fill="#610429" transform="translate(61.095506, 35.674157) scale(-1, -1) translate(-61.095506, -35.674157) " points="40.7303371 30.6179775 81.4606742 30.6179775 71.2525696 40.7303371"></polygon>
+                    <polygon id="Path-4" fill="#610429" points="30.6179775 30.5477528 40.7303371 0 40.7303371 40.7303371"></polygon>
+                    <polygon id="Path-4" fill="#610429" transform="translate(45.786517, 61.095506) scale(-1, -1) translate(-45.786517, -61.095506) " points="40.7303371 71.2780899 50.8426966 40.7303371 50.8426966 81.4606742"></polygon>
+                </g>
+                <g id="BIG" transform="translate(50.000000, 50.000000) scale(-1, 1) rotate(-330.000000) translate(-50.000000, -50.000000) translate(-6.179775, -6.179775)">
+                    <polygon id="Path-2" fill="#FFFFFF" points="56.1797753 0 42.1348315 42.1348315 0 56.1797753 42.1348315 70.2247191 56.1797753 112.359551 70.2247191 70.2247191 112.359551 56.1797753 70.2247191 42.1348315"></polygon>
+                    <polygon id="Path-3" fill="#610429" points="0 56.1797753 56.1797753 56.1797753 42.0996311 70.2247191"></polygon>
+                    <polygon id="Path-3" fill="#610429" transform="translate(84.269663, 49.157303) scale(-1, -1) translate(-84.269663, -49.157303) " points="56.1797753 42.1348315 112.359551 42.1348315 98.2794064 56.1797753"></polygon>
+                    <polygon id="Path-4" fill="#610429" points="42.1348315 42.1348315 56.1797753 0 56.1797753 56.1797753"></polygon>
+                    <polygon id="Path-4" fill="#610429" transform="translate(63.202247, 84.269663) scale(-1, -1) translate(-63.202247, -84.269663) " points="56.1797753 98.3146067 70.2247191 56.1797753 70.2247191 112.359551"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

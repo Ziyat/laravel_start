@@ -16,7 +16,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/',app()->getLocale()) }}">
                 {{ config('app.name') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -35,35 +35,52 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login',app()->getLocale()) }}"><i
+                                        class="fa fa-sign-in"></i> {{ __('auth.sign_in') }}</a>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register',app()->getLocale()) }}"><i
+                                            class="fa fa-lock"></i> {{ __('auth.sign_up') }}</a>
                             </li>
                         @endif
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('Admin') }}</a>
-                                <a class="dropdown-item" href="{{ route('cabinet.home') }}">{{ __('Cabinet') }}</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item"
+                                   href="{{ route('admin.home',app()->getLocale()) }}">{{ __('Admin') }}</a>
+                                <a class="dropdown-item"
+                                   href="{{ route('cabinet.home',app()->getLocale()) }}">{{ __('Cabinet') }}</a>
+                                <a class="dropdown-item" href="{{ route('logout',app()->getLocale()) }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                <form id="logout-form" action="{{ route('logout', app()->getLocale())}}" method="POST"
                                       style="display: none;">
                                     @csrf
                                 </form>
                             </div>
                         </li>
                     @endguest
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <i class="fa fa-language"></i> {{ strtoupper(app()->getLocale()) }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            @foreach(config('app.available_locales') as $locale)
+                                <a class="dropdown-item" href="{{ route(Route::currentRouteName(), $locale) }}">
+                                    {{ strtoupper($locale) }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -71,8 +88,8 @@
 </header>
 <main class="app-content py-3">
     <div class="container">
-        @section('breadcrumbs',Breadcrumbs::render())
-        @yield('breadcrumbs')
+        {{--        @section('breadcrumbs',Breadcrumbs::render())--}}
+        {{--        @yield('breadcrumbs')--}}
         @include('layouts.partials.flash')
         @yield('content')
     </div>

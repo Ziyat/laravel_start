@@ -15,22 +15,23 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()
+                ->index()
+                ->references('id')
+                ->on('users')
+                ->onDelete('CASCADE');;
             $table->string('name');
             $table->string('family_name')->nullable();
             $table->integer('birth_date')->nullable();
             $table->string('photo')->nullable();
             $table->string('nickname')->nullable();
             $table->string('gender')->default('male');
+            $table->integer('country_id')->nullable()
+                ->references('id')
+                ->on('countries')
+                ->onDelete('CASCADE');
             $table->integer('created_at');
             $table->integer('updated_at');
-        });
-
-        Schema::table('profiles', function (Blueprint $table) {
-            $table->index('user_id');
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
         });
     }
 

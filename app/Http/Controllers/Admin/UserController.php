@@ -7,6 +7,7 @@ use App\Domain\User\UseCases\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\CreateRequest;
 use App\Http\Requests\Admin\User\UpdateRequest;
+use Illuminate\Http\Request;
 
 
 /**
@@ -24,13 +25,35 @@ class UserController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \InvalidArgumentException
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('id', 'desc')->paginate(20);
-        return view('admin.user.index', compact(['users']));
+        $query = User::orderByDesc('id');
+
+        if (!empty($value = $request->get('id'))) {
+            $query->where('id', $value);
+        }
+        if (!empty($value = $request->get('name'))) {
+            $query->where('name', 'like', "%$value%");
+        }
+        if (!empty($value = $request->get('email'))) {
+            $query->where('email', 'like', "%$value%");
+        }
+        if (!empty($value = $request->get('status'))) {
+            $query->where('status', $value);
+        }
+        if (!empty($value = $request->get('role'))) {
+            $query->where('role', $value);
+        }
+
+        $users = $query->paginate(5);
+
+        $statuses = User::getStatuses();
+        $roles = User::getRoles();
+        return view('admin.user.index', compact('users', 'statuses', 'roles'));
     }
 
     public function create()
@@ -55,7 +78,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('admin.user.edit', compact(['user']));
+        return view('admin.user.edit', compact('user'));
     }
 
     public function update(UpdateRequest $request, User $user)

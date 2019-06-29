@@ -3,6 +3,7 @@
 
 namespace App\Domain\User\UseCases\Services;
 
+use App\Domain\User\Entities\Profile;
 use App\Domain\User\Entities\User;
 use App\Domain\User\UseCases\Repositories\UserRepository;
 use App\Http\Requests\Admin\User\CreateRequest;

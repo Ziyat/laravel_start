@@ -50,9 +50,9 @@ class LoginController extends Controller
             /** @var User $user */
             if(!$user->isActive()){
                 Auth::logout();
-                return back()->with('error','You need to confirm your account. Please check your email.');
+                return back()->with('error', __('auth.You need to confirm'));
             }
-            return redirect()->intended(route('cabinet.home'));
+            return redirect()->intended(route('cabinet.home', app()->getLocale()));
         }
         $this->incrementLoginAttempts($request);
         throw ValidationException::withMessages(['email' => [trans('auth.failed')]]);
@@ -67,7 +67,7 @@ class LoginController extends Controller
     {
         Auth::guard()->logout();
         $request->session()->invalidate();
-        return redirect()->route('home');
+        return redirect()->route('home', app()->getLocale());
     }
 
     protected function username()

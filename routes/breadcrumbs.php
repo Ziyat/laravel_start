@@ -33,8 +33,7 @@ Breadcrumbs::register('cabinet.home', function (Crumbs $crumbs) {
 });
 
 Breadcrumbs::register('admin.home', function (Crumbs $crumbs) {
-    $crumbs->parent('home');
-    $crumbs->push('Admin', route('admin.home'));
+    $crumbs->push('Dashboard', route('admin.home'));
 });
 
 Breadcrumbs::register('admin.user.index', function (Crumbs $crumbs) {
